@@ -10,4 +10,8 @@ class ApiProvider extends ChangeNotifier {
     productList = await ApiCalling.loadApiData();
     notifyListeners();
   }
+
+  Future<void> addProductToCart(ProductModel product) async {
+    await ApiCalling.addProductToCart(product);
+  }
 }

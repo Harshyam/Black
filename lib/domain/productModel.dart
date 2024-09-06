@@ -1,4 +1,3 @@
-
 class ProductModel {
   String? id;
   String? title;
@@ -27,6 +26,16 @@ class ProductModel {
         image: json["image"],
         rating: Rating.fromJson(json["rating"]),
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "title": title,
+        "price": price,
+        "description": description,
+        "category": category,
+        "image": image,
+        "rating": rating?.toJson(),
+      };
 }
 
 class Rating {
@@ -42,4 +51,9 @@ class Rating {
         rate: json["rate"]?.toDouble(),
         count: json["count"].toString(),
       );
+
+  Map<String, dynamic> toJson() => {
+        "rate": rate,
+        "count": count,
+      };
 }
