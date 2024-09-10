@@ -107,14 +107,13 @@ class _LogInScreenState extends State<LogInScreen> {
                 color: Colors.white, // Change this to your desired text color
               ),
             ),
-             const Align(
+            const Align(
               alignment: Alignment.centerRight,
-               child: Text(
+              child: Text(
                 "Forget Password?",
-                style:
-                    TextStyle(color: Colors.white, fontSize: 14),
-                           ),
-             ),
+                style: TextStyle(color: Colors.white, fontSize: 14),
+              ),
+            ),
 
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.04,
@@ -123,8 +122,8 @@ class _LogInScreenState extends State<LogInScreen> {
             Consumer<AuthProvider>(
               builder: (context, value, child) {
                 return GestureDetector(
-                  onTap: () {
-                    value.logIn(
+                  onTap: () async {
+                    await value.logIn(
                         email: emailController.text,
                         password: passwordController.text,
                         context: context);
@@ -178,64 +177,58 @@ class _LogInScreenState extends State<LogInScreen> {
               ],
             ),
 
-             SizedBox(
+            SizedBox(
               height: MediaQuery.of(context).size.height * 0.02,
             ),
 
-             // apple button
+            // apple button
             Container(
-              width:  MediaQuery.of(context).size.width,
+              width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.06,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(.2),
-              borderRadius: BorderRadius.circular(5)
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-              Image.asset("assets/createScreen/apl.png"),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.04,
+              decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(.2),
+                  borderRadius: BorderRadius.circular(5)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset("assets/createScreen/apl.png"),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.04,
+                  ),
+                  const Text(
+                    "Continue with Apple",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  )
+                ],
               ),
-              const Text("Continue with Apple",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18
-                ),)
-            ],),
             ),
-
 
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.02,
             ),
 
-
-
-              // google button
+            // google button
             Container(
-              width:  MediaQuery.of(context).size.width,
+              width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.06,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(.2),
-              borderRadius: BorderRadius.circular(5)
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-              Image.asset("assets/createScreen/google.png"),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.04,
+              decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(.2),
+                  borderRadius: BorderRadius.circular(5)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset("assets/createScreen/google.png"),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.04,
+                  ),
+                  const Text(
+                    "Continue with Google",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  )
+                ],
               ),
-              const Text("Continue with Google",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18
-                ),)
-            ],),
             ),
 
-           
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.04,
             ),
@@ -254,7 +247,8 @@ class _LogInScreenState extends State<LogInScreen> {
                       text: 'Sign Up', // Bold text
                       style: TextStyle(
                         fontWeight: FontWeight.bold, // Bold font weight
-                        color: Colors.white, // Color of the bold text (optional)
+                        color:
+                            Colors.white, // Color of the bold text (optional)
                         fontSize: 16.0, // Font size of the bold text
                       ),
                     ),

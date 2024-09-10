@@ -2,6 +2,7 @@ import 'package:black/domain/category_model.dart';
 import 'package:black/domain/productModel.dart';
 import 'package:black/services/auth/firestore_collections.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -46,9 +47,20 @@ class ApiCalling {
 
   /// Add product to user specific cart.
   static Future<dynamic> addProductToCart(ProductModel product) async {
-    final _fireStore = FirebaseFirestore.instance;
+    final fireStore = FirebaseFirestore.instance;
+    final userId = FirebaseAuth.instance.currentUser?.uid;
 
-    final userRef = _fireStore.collection(FirestoreCollections.users).doc();
-    await userRef.collection(FirestoreCollections.cart).add(product.toJson());
+    final cartRef = fireStore.collection(FirestoreCollections.cart).doc(userId);
+
+    final currentProducts = await cartRef.get();
+    List<dynamic> currentProductsList =
+        currentProducts.data()?['products'] ?? [];
+    currentProductsList.add(product.toJson());
+
+    final productData = {
+      'products': currentProductsList,
+    };
+
+    await cartRef.update(productData);
   }
 }

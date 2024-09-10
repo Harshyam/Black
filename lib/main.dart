@@ -1,4 +1,5 @@
 import 'package:black/core/providers/ApiProvider.dart';
+import 'package:black/core/providers/basket_provider.dart';
 import 'package:black/core/providers/category_provider.dart';
 import 'package:black/firebase_options.dart';
 import 'package:black/presentation/screens/home_screen.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => CategoryProvider()),
         ChangeNotifierProvider(create: (context) => ApiProvider()),
+        ChangeNotifierProvider(create: (context) => BasketProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

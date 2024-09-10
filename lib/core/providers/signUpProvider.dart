@@ -8,7 +8,10 @@ import '../../presentation/screens/home_screen.dart';
 class AuthProvider extends ChangeNotifier {
   late UserCredential userCredential;
 
-  signUp({required String email, required String password,required BuildContext context}) async {
+  signUp(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
     userCredential =
         await AuthService.signUpwithEmail(email: email, password: password);
     notifyListeners();
@@ -17,12 +20,29 @@ class AuthProvider extends ChangeNotifier {
         (route) => false);
   }
 
-  logIn({required String email, required String password, required BuildContext context}) async {
-    userCredential =
-        await AuthService.logInwithEmail(email: email, password: password, );
+  Future<void> logIn(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    userCredential = await AuthService.logInwithEmail(
+      email: email,
+      password: password,
+    );
     notifyListeners();
-     Navigator.of(context).pushAndRemoveUntil(
+    Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => const HomeScreen()),
         (route) => false);
+  }
+
+  Future<void> logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    if (!context.mounted) return;
+    await Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LogInScreen(),
+      ),
+      (_) => false,
+    );
   }
 }

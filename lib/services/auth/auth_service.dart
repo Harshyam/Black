@@ -14,9 +14,18 @@ class AuthService {
     final userData = {
       'email': userCredential.user?.email,
       'password': password,
+      'uid': userCredential.user?.uid,
     };
 
-    await _fireStore.collection(FirestoreCollections.users).add(userData);
+    await _fireStore
+        .collection(FirestoreCollections.users)
+        .doc(userCredential.user?.uid)
+        .set(userData);
+
+    await _fireStore
+        .collection(FirestoreCollections.cart)
+        .doc(userCredential.user?.uid)
+        .set({});
 
     return userCredential;
   }

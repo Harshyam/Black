@@ -1,5 +1,7 @@
 import 'package:black/core/providers/ApiProvider.dart';
 import 'package:black/core/providers/category_provider.dart';
+import 'package:black/core/providers/signUpProvider.dart';
+import 'package:black/presentation/basket_screen.dart';
 import 'package:black/presentation/product/product_card.dart';
 import 'package:black/presentation/screens/product_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -39,17 +41,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(
-                      "assets/homeScreen/Menu.png",
-                      height: MediaQuery.of(context).size.height * 0.04,
+                    InkWell(
+                      onTap: () async => await Provider.of<AuthProvider>(
+                        context,
+                        listen: false,
+                      ).logout(context),
+                      child: Image.asset(
+                        "assets/homeScreen/Menu.png",
+                        height: MediaQuery.of(context).size.height * 0.04,
+                      ),
                     ),
                     Image.asset(
                       "assets/B_logo.png",
                       height: MediaQuery.of(context).size.height * 0.04,
                     ),
-                    Image.asset(
-                      "assets/homeScreen/Notification.png",
-                      height: MediaQuery.of(context).size.height * 0.04,
+                    InkWell(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BasketScreen(),
+                        ),
+                      ),
+                      child: Image.asset(
+                        "assets/homeScreen/Notification.png",
+                        height: MediaQuery.of(context).size.height * 0.04,
+                      ),
                     ),
                   ],
                 ),

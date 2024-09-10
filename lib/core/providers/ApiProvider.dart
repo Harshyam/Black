@@ -12,6 +12,6 @@ class ApiProvider extends ChangeNotifier {
   }
 
   Future<void> addProductToCart(ProductModel product) async {
-    await ApiCalling.addProductToCart(product);
+      await ApiCalling.addProductToCart(product);
   }
 }
